@@ -47,6 +47,18 @@ const recipeSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    sourceUrl: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: String,
+      default: '',
+    },
+    spoonacularId: {
+      type: Number,
+      default: null,
+    },
   },
   {
     timestamps: true,
