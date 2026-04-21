@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -15,12 +16,21 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// API Routes
 app.use('/api/recipes', recipeRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'Server is running' });
+});
+
+// Serve React static build
+const clientBuild = path.join(__dirname, '..', 'client', 'build');
+app.use(express.static(clientBuild));
+
+// Catch-all: serve React index.html for any non-API route
+app.get('{*path}', (req, res) => {
+  res.sendFile(path.join(clientBuild, 'index.html'));
 });
 
 // Error handling middleware

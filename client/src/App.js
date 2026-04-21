@@ -9,7 +9,7 @@ import Loader from './components/Loader';
 import Toast from './components/Toast';
 import { AlertCircle } from 'lucide-react';
 
-const API = 'http://localhost:5000/api/recipes';
+const API = '/api/recipes';
 
 function App() {
   const [page, setPage] = useState('home');

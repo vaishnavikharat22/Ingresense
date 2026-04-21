@@ -7,6 +7,9 @@ function Header({ page, setPage, savedCount }) {
       <div className="header-inner">
         <div className="logo" onClick={() => setPage('home')}>
           Ingre<span>sense</span>
+          <sup style={{ fontSize: '0.45em', marginLeft: '4px', color: 'var(--accent-warm)', backgroundColor: 'var(--accent-yellow-light)', padding: '2px 6px', borderRadius: '4px', verticalAlign: 'super', fontWeight: '800' }}>
+            PRO
+          </sup>
         </div>
         <div className="nav-buttons">
           <button

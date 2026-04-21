@@ -1,207 +1,121 @@
-# 🚀 Ingresense - Quick Start Guide
+# 🚀 Ingresense — Quick Start Guide
 
-## Prerequisites Check ✓
+---
 
-Before starting, make sure you have:
-- ✅ Node.js v14+ and npm installed
-- ✅ MongoDB running (locally or MongoDB Atlas)
-- ✅ OpenAI API key from https://platform.openai.com/api-keys
+## Prerequisites
 
-## 5-Minute Setup
+| Tool       | Required | Check Command        |
+|------------|----------|----------------------|
+| Node.js    | v14+     | `node -v`            |
+| npm        | v6+      | `npm -v`             |
+| MongoDB    | Running  | `mongod --version`   |
 
-### Step 1: Backend Configuration (1 min)
+---
+
+## First-Time Setup (One Time Only)
+
+### 1. Install Backend Dependencies
 
 ```bash
 cd server
+npm install
 ```
 
-Open `server/.env` and update:
+### 2. Create Environment File
+
+Create `server/.env` with the following:
 
 ```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/ingresense
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxx  # Your actual API key
+SPOONACULAR_API_KEY=your_spoonacular_api_key_here
 ```
 
-### Step 2: Install Dependencies (2 min)
+### 3. Install Frontend Dependencies
 
 ```bash
-# Backend
-cd server
-npm install
-
-# Frontend (in another terminal)
 cd client
 npm install
 ```
 
-### Step 3: Start Services (2 min)
+### 4. Build the Frontend
 
-**Terminal 1 - MongoDB** (if using local):
-```bash
-mongod
-```
-
-**Terminal 2 - Backend**:
-```bash
-cd server
-npm start
-# You should see: "Server running on http://localhost:5000"
-```
-
-**Terminal 3 - Frontend**:
 ```bash
 cd client
-npm start
-# Browser will open to http://localhost:3000
+npm run build
 ```
 
-## 🎉 You're Live!
-
-Visit `http://localhost:3000` and start generating recipes!
-
-### Try it out:
-1. Type: `chicken`, press Enter
-2. Type: `rice`, press Enter
-3. Type: `garlic`, press Enter
-4. Click "Generate My Recipe"
-5. Wait 10-30 seconds for AI to create your recipe
-6. Click ⭐ to favorite or 👁️ to view full recipe
-
-## 📝 Environment Variables Reference
-
-### .env (server/):
-
-| Variable | Value | Example |
-|----------|-------|---------|
-| `PORT` | Server port | `5000` |
-| `MONGO_URI` | MongoDB connection | `mongodb://localhost:27017/ingresense` |
-| `OPENAI_API_KEY` | OpenAI API key | `sk-proj-abc123...` |
-
-### Frontend API Base:
-- Hardcoded in `client/src/App.js`
-- Default: `http://localhost:5000/api/recipes`
-
-## ⚠️ Common Issues & Fixes
-
-### Issue: "Cannot GET /api/recipes"
-**Solution**: Make sure backend is running (`npm start` in `server/`)
-
-### Issue: "MongoDB connection failed"
-**Solution**: 
-```bash
-# Start MongoDB locally
-mongod
-
-# OR use MongoDB Atlas
-# Update MONGO_URI in .env to your Atlas connection string
-```
-
-### Issue: "Invalid API key" or OpenAI error
-**Solution**: 
-1. Verify your API key from https://platform.openai.com/api-keys
-2. Paste it correctly in `.env`
-3. Make sure you have credits in your OpenAI account
-
-### Issue: "Port 5000 already in use"
-**Solution**: Change PORT in `.env` or kill process using port 5000
-
-### Issue: "CORS error"
-**Solution**: Ensure:
-- Backend on `localhost:5000`
-- Frontend on `localhost:3000`
-- Both services are running
-
-## 🛠️ Development Commands
-
-### Backend:
-```bash
-npm start      # Run with nodemon (auto-reload on changes)
-npm run dev    # Same as above
-```
-
-### Frontend:
-```bash
-npm start      # Start dev server
-npm build      # Build for production
-npm test       # Run tests
-```
-
-## 📱 Testing the API with curl
-
-```bash
-# Get all recipes
-curl http://localhost:5000/api/recipes
-
-# Generate a recipe
-curl -X POST http://localhost:5000/api/recipes/generate \
-  -H "Content-Type: application/json" \
-  -d '{"ingredients":["chicken","tomato","garlic"]}'
-
-# Toggle favorite (replace :id with actual recipe ID)
-curl -X PATCH http://localhost:5000/api/recipes/:id/favorite
-
-# Delete recipe
-curl -X DELETE http://localhost:5000/api/recipes/:id
-```
-
-## 🎨 UI Features
-
-### Home Page
-- Enter ingredients as tags
-- One-click recipe generation
-- View generated recipe immediately
-
-### Saved Recipes
-- Browse all recipes
-- Filter by "All" or "Favorites"
-- View recipe count
-
-### Recipe Card
-- Cuisine type badge
-- Difficulty level (Easy/Medium/Hard)
-- Prep & cook time, servings
-- Full ingredient list
-- Step-by-step instructions
-- Favorite toggle
-- Delete option
-
-### Recipe Modal
-- Full recipe in overlay
-- Close with Escape key or backdrop click
-- All recipe details
-
-## 📊 Project Statistics
-
-- **Frontend**: 7 components + App.js
-- **Backend**: 5 files (config, models, routes, server.js, .env)
-- **Styling**: 1000+ lines custom CSS
-- **API Endpoints**: 5 (Generate, Get All, Get One, Toggle Favorite, Delete)
-- **Database Schema**: 1 (Recipe)
-
-## 🚀 Next Steps
-
-### To deploy:
-1. **Backend**: Deploy to Heroku/Render/Railway
-2. **Frontend**: Deploy to Vercel/Netlify
-3. **Database**: Use MongoDB Atlas
-4. Update API_BASE_URL in frontend to deployed backend URL
-
-### To extend:
-- Add user authentication
-- Add recipe ratings/reviews
-- Add search functionality
-- Save favorite recipes to user profile
-- Export recipes as PDF
-
-## 📞 Need Help?
-
-Check the main `README.md` for:
-- Detailed architecture
-- Full API documentation
-- Deployment guides
-- Troubleshooting section
+> This creates the `client/build/` folder that the server serves.
 
 ---
 
-**That's it! Enjoy generating recipes with AI! 🍳**
+## ▶️ Starting the App
+
+You only need **ONE terminal** and **ONE command**:
+
+```bash
+cd server
+node server.js
+```
+
+You should see:
+
+```
+Server running on http://localhost:5000
+MongoDB connected successfully
+```
+
+**Open your browser → `http://localhost:5000`**
+
+That's it. The entire app (frontend + backend + API) runs on port **5000**.
+
+---
+
+## 🔄 After Making Frontend Changes
+
+If you edit any file inside `client/src/`, you must rebuild:
+
+```bash
+cd client
+npm run build
+```
+
+Then restart the server:
+
+```bash
+cd server
+node server.js
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Ingresense/
+├── client/               # React Frontend
+│   ├── src/
+│   │   ├── App.js        # Main app component
+│   │   ├── App.css       # All styles
+│   │   └── components/   # UI components
+│   └── build/            # Production build (served by Express)
+│
+├── server/               # Node.js Backend
+│   ├── server.js         # Express server (serves API + frontend)
+│   ├── routes/           # API route handlers
+│   ├── models/           # MongoDB schemas
+│   ├── config/           # Database connection
+│   └── .env              # Environment variables (not committed)
+```
+
+---
+
+## ⚠️ Troubleshooting
+
+| Problem                          | Fix                                                       |
+|----------------------------------|------------------------------------------------------------|
+| `MongoDB connection failed`      | Make sure `mongod` is running in the background            |
+| `EADDRINUSE: port 5000`          | Another process is on 5000. Kill it or change PORT in .env |
+| Blank page on localhost:5000     | Run `npm run build` inside `client/` first                 |
+| API returns 401/402              | Check your Spoonacular API key in `server/.env`            |
+| Frontend changes not showing     | Rebuild: `cd client && npm run build`, then restart server |
